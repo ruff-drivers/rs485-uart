@@ -1,0 +1,44 @@
+{
+    "models": [],
+    "inputs": {
+        "gpio": {
+            "type": "gpio",
+            "args": {
+                "direction": "out",
+                "level": "low"
+            }
+        },
+        "uart": {
+            "type": "uart",
+            "args": {
+                "baudRate": {
+                    "type": "number",
+                    "default": 9600
+                },
+                "stopBits": {
+                    "type": "number",
+                    "default": 1
+                },
+                "dataBits": {
+                    "type": "number",
+                    "default": 8
+                },
+                "parity": {
+                    "type": "string",
+                    "default": "none"
+                },
+                "flowControl": "none"
+            }
+        }
+    },
+    "args": {
+        "txEnableControl": {
+            "type": "boolean",
+            "default": false
+        },
+        "txActiveLevel": {
+            "type": "number",
+            "default": 1
+        }
+    }
+}
