@@ -42,10 +42,14 @@ module.exports = driver({
                     return;
                 }
                 rxToTxSwitchDelay.call(that);
-                that._uart.write(data, function (error) {
+                that._uart.write(data, function (error, length) {
                     txToRxSwitchDelay.call(that, data);
                     that._gpio.write(1 - that._txActiveLevel, function () {
-                        callback && callback(error);
+                        if (error) {
+                            callback(error);
+                        } else {
+                            callback(undefined, length);
+                        }
                     });
                 });
             });

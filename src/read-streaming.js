@@ -18,7 +18,7 @@ util.inherits(ReadStreaming, EventEmitter);
 ReadStreaming.prototype.start = function () {
     var that = this;
 
-    readNext();
+    setImmediate(readNext);
 
     function readNext() {
         that._read(function (error, data) {
@@ -26,7 +26,7 @@ ReadStreaming.prototype.start = function () {
                 that.emit('error', error);
             } else {
                 that.emit('data', data);
-                readNext();
+                setImmediate(readNext);
             }
         });
     }
