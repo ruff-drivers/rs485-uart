@@ -37,7 +37,7 @@ module.exports = driver({
             var that = this;
             this._gpio.write(this._txActiveLevel, function (error) {
                 if (error) {
-                    callback(error);
+                    callback && callback(error);
                     return;
                 }
                 rxToTxSwitchDelay.call(that);
@@ -45,9 +45,9 @@ module.exports = driver({
                     txToRxSwitchDelay.call(that, data);
                     that._gpio.write(1 - that._txActiveLevel, function () {
                         if (error) {
-                            callback(error);
+                            callback && callback(error);
                         } else {
-                            callback(undefined, length);
+                            callback && callback(undefined, length);
                         }
                     });
                 });
