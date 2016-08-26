@@ -50,17 +50,17 @@ Common issues or pitfalls of using this driver. Can be removed if none.
 
 ### Methods
 
-#### `read(callback)`
-
-Read data from the RS-485 bus.
-
-- **callback:** No argument other than a possible error is given to the completion callback.
-
 #### `write(data[, callback])`
 
 Write data to the RS-485 bus.
 
-- **callback:** No argument other than a possible error is given to the completion callback.
+- **callback:** The callback gets `error` and `length` as its arguments.
+
+### Events
+
+#### `data`
+
+Emitted when data comes.
 
 ## Contributing
 
