@@ -14,24 +14,23 @@ module.exports = driver({
         var that = this;
         this._gpio = inputs['gpio'];
         this._uart = inputs['uart'];
-        this._readStream = new ReadStreaming(this._uart);
 
-        this._readStream.on('data', function (data) {
+        var baudRate = this._uart.baudRate;
+        var stopBits = this._uart.stopBits;
+        var dataBits = this._uart.dataBits;
+        var parity = this._uart.parity;
+
+        this._baudRate = baudRate;
+        this._charLength = 1 + dataBits + stopBits + (!!parity - 0);
+
+        this._txEnableControl = context.args.txEnableControl;
+        this._txActiveLevel = context.args.txActiveLevel;
+
+        var readStreaming = new ReadStreaming(this._uart);
+        readStreaming.on('data', function (data) {
             that.emit('data', data);
         });
-
-        this._baudRate = this._uart.baudRate;
-        this._stopBits = this._uart.stopBits;
-        this._dataBits = this._uart.dataBits;
-        this._parity = this._uart.parity;
-        this._charLength = 1 + this._dataBits + this._stopBits + (!!this._parity - 0);
-
-        var args = context.args;
-
-        this._txEnableControl = args.txEnableControl;
-        this._txActiveLevel = args.txActiveLevel;
-
-        this._readStream.start();
+        readStreaming.start();
     },
     exports: {
         write: function (data, callback) {
