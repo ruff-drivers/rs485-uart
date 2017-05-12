@@ -38,7 +38,7 @@ Other possible steps involved if any.
 Here is the basic usage of this driver.
 
 ```js
-$('#<device-id>').read(callback);
+$('#<device-id>').on(event, callback);
 $('#<device-id>').write(data, callback);
 ```
 
@@ -61,6 +61,10 @@ Write data to the RS-485 bus.
 #### `data`
 
 Emitted when data comes.
+
+#### `error`
+
+Emitted when error happens.
 
 ## Contributing
 

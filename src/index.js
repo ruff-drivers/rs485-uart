@@ -6,7 +6,6 @@
 'use strict';
 
 var driver = require('ruff-driver');
-var ReadStreaming = require('./read-streaming');
 var mdelay = driver.mdelay;
 
 module.exports = driver({
@@ -26,11 +25,12 @@ module.exports = driver({
         this._txEnableControl = context.args.txEnableControl;
         this._txActiveLevel = context.args.txActiveLevel;
 
-        var readStreaming = new ReadStreaming(this._uart);
-        readStreaming.on('data', function (data) {
+        this._uart.on('data', function (data) {
             that.emit('data', data);
         });
-        readStreaming.start();
+        this._uart.on('error', function (error) {
+            that.emit('error', error);
+        });
     },
     exports: {
         write: function (data, callback) {

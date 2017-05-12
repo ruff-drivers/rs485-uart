@@ -1,6 +1,6 @@
 {
   "name": "rs485-uart",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Driver description.",
   "author": "Nanchao Inc.",
   "license": "MIT",
