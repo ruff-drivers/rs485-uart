@@ -6,7 +6,7 @@ RS-485 driver with UART interface.
 
 ## Supported Engines
 
-* Ruff: ~1.2.0
+* Ruff: >=1.9.0
 
 ## Supported Models
 
